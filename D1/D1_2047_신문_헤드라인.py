@@ -1,6 +1,6 @@
 def main():
-  print(input().upper())
+    print(input().upper())
 
 
 if __name__ == '__main__':
-  main()
+    main()
