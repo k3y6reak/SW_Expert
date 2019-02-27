@@ -1,5 +1,5 @@
 def main():
-  print("#"*int(input()))
+    print("#"*int(input()))
 
 if __name__ == '__main__':
-  main()
+    main()
