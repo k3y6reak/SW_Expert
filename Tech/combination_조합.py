@@ -1,18 +1,19 @@
-def combination(arr, bool, idx, cnt):
-    if cnt == len(bool):
-        print(bool)
+def combination(arr, sel, idx, cnt):
+    if cnt == len(sel):
+        print(sel)
         return
 
     if idx == len(arr):
         return
 
-    bool[cnt] = arr[idx]
-    combination(arr, bool, idx + 1, cnt+1)
-    bool[cnt] = 0
-    combination(arr, bool, idx + 1, cnt)
-    
+    sel[cnt] = arr[idx]
+    combination(arr, sel, idx + 1, cnt+1)
+    sel[cnt] = 0
+    combination(arr, sel, idx + 1, cnt)
+
 def main():
-    arr = [1, 2, 3]
-    combination(arr, [False, False], 0, 0)
+    arr = [0, 1, 2, 3, 4]
+    sel = [0]*2 # 두개선택
+    combination(arr, sel, 0, 0)
 if __name__ == '__main__':
     main()
