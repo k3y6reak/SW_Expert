@@ -2,8 +2,6 @@ def main():
     tc = int(input())
     for t in range(1, tc+1):
         n = int(input())
-        m = [[0]*n for _ in range(n)]
-
         rows = dict()
         for i in range(n):
             row = 0
@@ -17,7 +15,6 @@ def main():
                     row = 0
                 else:
                     row += 1
-                m[i][j] = line[j]
             if row not in rows:
                 rows[row] = 1
             else:
