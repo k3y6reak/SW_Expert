@@ -1,42 +1,54 @@
+# [아이디어]
+# 3개의 재료가 있을때 (1, 2)와 (2, 3) 재료가 함께 들어가면 안된다.
+# 재료 수 만큼 방문 배열을 하나 만든다.
+# (1, 2) 와 (2, 3)에 대한 부분 집합을 만든다.
+# 재료는 (1, 2) / (2, 3) 2가지가 있고 방문 배열은 재료의 수인 3이 된다.
+# 부분집합을 구하는 코드에서 선택하고, 선택하지 않은 경우를 구현하는데,
+# 재료들을 하나씩 꺼내면서 방문배열의 재료의 첫번째 (1, 2)라면 1 을 꺼내어 방문 한 것이면 체크하고
+# 다음 두번째 2도 방문한 것이면 리턴한다.
+# 두개가 모두 방문 했다는 것은 두 재료가 모두 들어갔다는 것이다.
+# 둘 중 하나라도 방문하지 않은 것은 ans를 1증가 시켜주면 된다.
+
+
 ans = 0
 
-def powerset(num, bool, idx, e_num):
-    global ans
-    chk = False
-    for i in range(0, len(num)):
-        for j in range(0, len(bool)):
-            if bool[num[i][0]-1]:
-                chk = True
-            if chk and bool[num[i][1]-1]:
-                return
-            chk = False
 
-    if idx == e_num:
+def power_set(el, vi, n, idx):
+    global ans
+
+    chk = False
+    for i in range(0, len(el)):
+        if vi[el[i][0]-1]:
+            chk = True
+            if chk and vi[el[i][1]-1]:
+                return
+
+    if idx == n:
         ans += 1
         return
 
-    bool[idx] = True
-    powerset(num, bool, idx + 1, e_num)
-    bool[idx] = False
-    powerset(num, bool, idx + 1, e_num)
+    vi[idx] = True
+    power_set(el, vi, n, idx + 1)
+    vi[idx] = False
+    power_set(el, vi, n, idx + 1)
+
 
 def main():
     global ans
-    test_case = int(input())
-    for t in range(test_case):
-        line1 = input().split()
-        e_num = int(line1[0])
-        c_num = int(line1[1])
 
-        num = [[0]*2 for i in range(c_num)]
-        for i in range(c_num):
-            line2 = input().split()
-            num[i][0] = int(line2[0])
-            num[i][1] = int(line2[1])
+    tc = int(input())
+    for t in range(1, tc+1):
+        n, m = map(int, input().split())
+
+        el = [[0]*2 for _ in range(m)]
+        for i in range(m):
+            el[i][0], el[i][1] = map(int, input().split())
 
         ans = 0
-        powerset(num, [False]*e_num, 0, e_num)
-        print('#'+str(t+1), str(ans))
+        power_set(el, [False]*n, n, 0)
+        print("#%d %d" %(t, ans))
+
 
 if __name__ == '__main__':
     main()
+
