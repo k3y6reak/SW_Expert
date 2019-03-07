@@ -56,3 +56,71 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+    
+#####################################################################
+# BFS 방식 해당 방식은 시간초과가 발생한다. (python의 경우)
+#####################################################################
+
+import queue
+
+dx = [0, 0, -1, 1]
+dy = [-1, 1, 0, 0]
+
+all = []
+
+
+def bfs(m, vi, n, i, j):
+    global dx, dy, all
+    tmp = []
+    room_no = m[i][j]
+    cnt = 1
+    q = queue.Queue()
+    q.put([i, j])
+    vi[i][j] = True
+
+    while not q.empty():
+        p = q.get()
+        x = p[0]
+        y = p[1]
+
+        for i in range(len(dx)):
+            nx = x + dx[i]
+            ny = y + dy[i]
+
+            if nx < 0 or ny < 0 or nx >= n or ny >= n:
+                continue
+
+            if (not vi[nx][ny]) and (m[nx][ny] == m[x][y] + 1):
+                vi[nx][ny] = True
+                q.put([nx, ny])
+                cnt += 1
+
+    tmp += [room_no, cnt]
+    all.append(tmp)
+
+
+def main():
+    global all
+
+    tc = int(input())
+    for t in range(1, tc+1):
+        n = int(input())
+        m = [[0]*n for _ in range(n)]
+        for i in range(n):
+            line = list(map(int, input().split()))
+            for j in range(n):
+                m[i][j] = line[j]
+
+        all = []
+        for i in range(n):
+            for j in range(n):
+                vi = [[False] * n for _ in range(n)]
+                bfs(m, vi, n, i, j)
+
+        all.sort(key=lambda x: (x[1], -x[0]))
+        print("#%d %d %d" %(t, all[-1][0], all[-1][1]))
+
+
+if __name__ == '__main__':
+    main()
