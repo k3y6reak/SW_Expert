@@ -15,23 +15,23 @@ def main():
         for i in range(n):
             chk[i] = int(input())
 
-        end = max(chk)*m
-        start = 0
-        low = end
+        end = max(chk)*m # 최악의 시간을 찾는다.
+        start = 0 # 최소의 시간
+        low = end # 최소의 시간 저장
 
         while start <= end:
-            mid = (start + end) // 2
+            mid = (start + end) // 2 # 중간 시간
             ans = 0
 
-            for i in range(n):
+            for i in range(n): # 중간 시간을 각 심사원의 시간으로 나누어 인원 수를 구한다.
                 ans += (mid // chk[i])
 
-            if ans < m:
-                start = mid + 1
+            if ans < m: # 처리된 인원 수가 실제 인원 수 보다 작으면
+                start = mid + 1 # 최소의 시간을 중간값 + 1로 변경
             else:
-                if low > mid:
-                    low = mid
-                end = mid - 1
+                if low > mid: # 처리된 인은 수가 같거나 많은 경우, 최소의 시간이 중간 시간 보다 작은 경우
+                    low = mid # 해당 중간 시간을 최소 시간으로 변경한다.
+                end = mid - 1 # 최악의 시간을 중간 값 - 1로 변경
 
         print("#%d %d" %(t, low))
 
