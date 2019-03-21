@@ -12,22 +12,20 @@ big = 0
 
 def dfs(map_, vi, cnt, hap, n):
     global big
+    calc = hap*100
 
-
-    if big >= hap*100:
+    if big >= calc:
         return
 
     if cnt == n:
-        tmp = hap * 100
-        if tmp > big:
-            big = tmp
+        big = max(big, calc)
         return
 
-    for i in range(n): # cnt위치에서 다음 사람의 확률을 모두 탐색.
-        if not vi[i]: # 방문하지 않았을때
-            vi[i] = True # 방문 표시
-            dfs(map_, vi, cnt + 1, hap*map_[cnt][i], n) # 들어간다.
-            vi[i] = False # 방문 해제
+    for i in range(n):
+        if not vi[i]:
+            vi[i] = True
+            dfs(map_, vi, cnt + 1, hap*map_[cnt][i], n)
+            vi[i] = False
 
 
 def main():
@@ -36,18 +34,14 @@ def main():
     tc = int(input())
     for t in range(1, tc+1):
         n = int(input())
-        map_ = [[0]*n for _ in range(n)]
-
-        for i in range(n):
-            line = list(map(int, input().split()))
-            for j in range(n):
-                map_[i][j] = line[j] / 100
+        map_ = [[t/100 for t in list(map(int, input().split()))] for _ in range(n)]
 
         vi = [False]*n
         big = 0
         dfs(map_, vi, 0, 1.0, n)
 
         print("#%d %0.6f" %(t, big))
+
 
 if __name__ == '__main__':
     main()
