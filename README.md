@@ -1,7 +1,9 @@
 ## SW Excert Academy Solution
 
 > SWEA 문제 솔루션입니다.
+
 > 솔루션은 대부분 `Python3`로 작성하였고, 일부 Python으로 해결못하는 문제에 대해서 java로 작성하였습니다.
+
 > 각 문제마다 `아이디어` 에 대한 설명이 있습니다.
 
 
