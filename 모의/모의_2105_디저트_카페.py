@@ -7,6 +7,7 @@
 
 
 
+
 dx = [1, 1, -1, -1]
 dy = [1, -1, -1, 1]
 
@@ -48,6 +49,8 @@ def main():
         big = -1
         for i in range(n):
             for j in range(n):
+                if (i == 0 and j == 0) or (i == 0 and j == n-1) or (i == n-1 and j == 0) or (i == n-1 and j == n-1):
+                    continue
                 vi = [False]*101
                 vi[map_[i][j]] = True
                 dfs(map_, vi, i, j, 0, 1, i, j, n)
@@ -58,3 +61,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+
